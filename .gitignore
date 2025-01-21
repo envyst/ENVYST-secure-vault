@@ -1,0 +1,11 @@
+venv
+env
+build
+dist
+*.spec
+.env
+
+accounts
+seeds
+private_keys
+others
