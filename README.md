@@ -1,14 +1,17 @@
 # ENVYST Secure Vault
 
-ENVYST Secure Vault is a Python-based application designed to securely store all your credentials locally in one app. By leveraging encryption techniques, it ensures that your sensitive information remains protected on your local machine.
+ENVYST Secure Vault is a Python-based application that allows you to securely store and manage all your credentials locally in one place. By leveraging encryption, it ensures that your sensitive information remains protected on your device. Additionally, you can sync your credentials with your Google Drive account for backup and accessibility.
 
 ## Features
 
-- **Local Storage**: All credentials are stored locally, giving you full control over your data.
-- **Encryption**: Utilizes AES-256 encryption to safeguard your credentials.
-- **User-Friendly Interface**: Simple command-line interface for easy interaction.
+- **Local Storage**: Keep all your credentials stored locally, reducing the risk associated with cloud storage.
+- **Encryption**: Protect your data with robust encryption methods.
+- **Google Drive Sync**: Easily back up and restore your encrypted credentials using your Google Drive account.
+- **User-Friendly Interface**: Interact with your credentials through a simple command-line interface.
 
 ## Installation
+
+To get started with ENVYST Secure Vault, follow these steps:
 
 1. **Clone the Repository**:
 
@@ -22,14 +25,18 @@ ENVYST Secure Vault is a Python-based application designed to securely store all
    cd ENVYST-secure-vault
    ```
 
-3. **Create a Virtual Environment** (optional but recommended):
+3. **Set Up a Virtual Environment**:
+
+   It is recommended to use a virtual environment to manage dependencies. Create and activate a virtual environment:
 
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-4. **Install Dependencies**:
+4. **Install the Required Dependencies**:
+
+   Ensure you have Python installed on your system. Then, install the necessary packages:
 
    ```bash
    pip install -r requirements.txt
@@ -37,34 +44,45 @@ ENVYST Secure Vault is a Python-based application designed to securely store all
 
 ## Usage
 
-1. **Run the Application**:
+1. **Running the Application**:
+
+   Execute the `envyst.py` script to start the application:
 
    ```bash
    python envyst.py
    ```
 
-2. **Follow the On-Screen Prompts**:
+   Alternatively, you can download the pre-built `envyst.exe` file from the `dist` directory in the repository. As long as Python is installed on your device, you can run the executable directly for ease of use.
 
-   - Add new credentials by providing a service name, username, and password.
-   - Retrieve stored credentials by specifying the service name.
-   - Delete credentials as needed.
+2. **Storing a New Credential**:
 
-## Security
+   Follow the on-screen prompts to input and save a new credential. The application will encrypt and store it locally.
 
-ENVYST Secure Vault employs AES-256 encryption to ensure that your credentials are stored securely. The encryption key is derived from a master password that you set upon first use. It is crucial to remember this master password, as it is required to access your stored credentials.
+3. **Retrieving a Credential**:
+
+   Use the application's interface to select and view your stored credentials. Decryption will occur in-memory to maintain security.
+
+4. **Syncing with Google Drive**:
+
+   - **Setup**: The first time you run the application, you will be prompted to authenticate your Google account.
+   - **Backup**: Choose the option to sync your encrypted credentials with Google Drive.
+   - **Restore**: Retrieve your encrypted backup from Google Drive to restore credentials on a new device or after reinstalling the application.
+
+## Security Considerations
+
+- **Encryption Key Management**: Ensure that your encryption key is stored securely and not hard-coded within the script.
+- **Local Storage**: Regularly back up your encrypted credentials to prevent data loss.
+- **Google Drive Authentication**: Do not share your Google account credentials or access tokens with anyone.
+- **Dependencies**: Keep your dependencies up to date to mitigate potential security vulnerabilities.
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests to enhance the functionality of ENVYST Secure Vault.
+We welcome contributions to enhance ENVYST Secure Vault. Feel free to fork the repository, make your changes, and submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ## Acknowledgments
 
-Special thanks to the open-source community for providing valuable resources and inspiration.
-
----
-
-*Note: Always ensure that your local environment is secure and that you have backups of your credentials.*
+Special thanks to the contributors and the open-source community for their support.
