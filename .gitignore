@@ -4,6 +4,8 @@ build
 dist
 *.spec
 .env
+credentials.json
+token.json
 
 accounts
 seeds
