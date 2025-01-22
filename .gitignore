@@ -1,7 +1,7 @@
 venv
 env
 build
-dist
+#dist
 *.spec
 .env
 credentials.json

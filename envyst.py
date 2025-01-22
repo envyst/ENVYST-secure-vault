@@ -20,6 +20,7 @@ import platform
 
 password = ""
 
+#---------------- Menu
 def draw_logo():
     logo = """
     =====================================
@@ -45,7 +46,9 @@ def show_menu():
     ------------------------------
     """
     print(menu)
+#---------------- Menu
 
+#---------------- Cryptography
 def derive_key(password, salt):
     kdf = PBKDF2HMAC(
         algorithm=SHA256(),
@@ -93,7 +96,9 @@ def setup_password():
 def validate_seed(seed):
     words = seed.split()
     return len(words) in [12, 24]
+#---------------- Cryptography
 
+#---------------- File Management
 def validate_private_key(private_key):
     return private_key.startswith("0x") and len(private_key) == 66
 
@@ -118,17 +123,17 @@ def list_and_choose(directory):
     global password
     if not password:
         print("Please set up a password first.")
-        rust = input("Press Any Key to Return to Menu")
+        ret_prompt()
         return
     if not os.path.exists(directory):
         print("No data available.")
-        rust = input("Press Any Key to Return to Menu")
+        ret_prompt()
         return None
 
     files = os.listdir(directory)
     if not files:
         print("No data available.")
-        rust = input("Press Any Key to Return to Menu")
+        ret_prompt()
         return None
 
     print("Available entries:")
@@ -159,7 +164,7 @@ def list_and_choose(directory):
     for line in decoded_data.split('\n'):
         print(line.strip())
     print("------------------------------------")
-    rust = input("Press Any Key to Return to Menu")
+    ret_prompt()
     
     return selected[1]
 
@@ -167,7 +172,7 @@ def delete_data():
     global password
     if not password:
         print("Please set up a password first.")
-        rust = input("Press Any Key to Return to Menu")
+        ret_prompt()
         return
     opts = """
     1. Account
@@ -188,15 +193,19 @@ def delete_data():
         list_and_delete("others")
     else:
         print("Invalid option")
+        ret_prompt()
+        return
     
 def list_and_delete(directory):
     if not os.path.exists(directory):
         print("No data available.")
+        ret_prompt()
         return None
 
     files = os.listdir(directory)
     if not files:
         print("No data available.")
+        ret_prompt()
         return None
 
     print("Available entries:")
@@ -224,17 +233,17 @@ def list_and_delete(directory):
             drive_file_path = f"{directory}/{selected[2]}"
             delete_file_from_drive(drive_file_path)
             print(f" '{selected_file_name}' has been deleted.")
-            rust = input("Press Any Key to Return to Menu")
+            ret_prompt()
         else:
             print(f" '{selected_file_name}' does not exist.")
-            rust = input("Press Any Key to Return to Menu")
+            ret_prompt()
         return selected[1]
 
 def add_data():
     global password
     if not password:
         print("Please set up a password first.")
-        rust = input("Press Any Key to Return to Menu")
+        ret_prompt()
         return
 
     print("Choose data type to add:")
@@ -265,6 +274,7 @@ def add_data():
         file_name = file_name_encrypt(account_name, password)
         save_to_file(directory, file_name, encrypted_content)
         print("Account added successfully.")
+        ret_prompt()
 
     elif choice == "2":
         directory = "seeds"
@@ -286,6 +296,7 @@ def add_data():
         file_name = file_name_encrypt(wallet_name, password)
         save_to_file(directory, file_name, encrypted_content)
         print("Seed added successfully.")
+        ret_prompt()
 
     elif choice == "3":
         directory = "private_keys"
@@ -307,6 +318,7 @@ def add_data():
         file_name = file_name_encrypt(wallet_name, password)
         save_to_file(directory, file_name, encrypted_content)
         print("Private key added successfully.")
+        ret_prompt()
 
     elif choice == "4":
         directory = "others"
@@ -328,19 +340,25 @@ def add_data():
         file_name = file_name_encrypt(type_name, password)
         save_to_file(directory, file_name, encrypted_content)
         print("Other data added successfully.")
+        ret_prompt()
 
     else:
         print("Invalid choice.")
-        
+        ret_prompt()
+#---------------- File Management        
 
-#---------------- Sect2
+#---------------- Utilities
 def clear_screen():
     # Check the platform and clear the screen
     if platform.system() == "Windows":
         os.system("cls")
     else:
         os.system("clear")
+def ret_prompt():
+    rust = input("Press Any Key to Return to Menu")
+#---------------- Utilities
 
+#---------------- GDRIVE
 def setup_google_credentials():
     print("Step 1: Go to the Google Cloud Console.")
     webbrowser.open("https://console.cloud.google.com/")
