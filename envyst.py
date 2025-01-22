@@ -90,7 +90,7 @@ def file_name_decrypt(token, password):
 
 def setup_password():
     global password
-    password = getpass.getpass("Enter a new password: ")
+    password = getpass.getpass("Enter your password: ")
     print("Password set successfully.")
 
 def validate_seed(seed):
@@ -231,7 +231,8 @@ def list_and_delete(directory):
         if os.path.exists(selected_file_path):
             os.remove(selected_file_path)
             drive_file_path = f"{directory}/{selected[2]}"
-            delete_file_from_drive(drive_file_path)
+            if os.path.exists('credentials.json'):
+                delete_file_from_drive(drive_file_path)
             print(f" '{selected_file_name}' has been deleted.")
             ret_prompt()
         else:
@@ -597,9 +598,11 @@ def validate_credentials(content):
     except json.JSONDecodeError:
         return False, "Invalid JSON format. Please check for syntax errors."
 
-#---------------- Sect2
+#---------------- GDRIVE
 
 if __name__ == "__main__":
+    clear_screen()
+    setup_password()
     while True:
         show_menu()
         choice = input("Enter your choice: ").strip()
@@ -631,7 +634,7 @@ if __name__ == "__main__":
         elif choice == "9":
             clear_screen()
             sync_account()
-        elif choice.lower() == "exit":
+        elif choice.lower() == "exit" or choice.lower() == "q":
             print("Exiting... Goodbye!")
             clear_screen()
             break
